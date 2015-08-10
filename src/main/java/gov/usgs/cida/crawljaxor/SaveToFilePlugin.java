@@ -14,51 +14,22 @@ import java.util.Set;
 public class SaveToFilePlugin implements OnNewStatePlugin {
 
 	private HostInterface hostInterface;
-	private Set<String> visitedUrls = new HashSet<>();
-	
-	private synchronized void markVisited(String str){
-		visitedUrls.add(str);
-	}
-	private synchronized boolean hasBeenVisited(String str){
-		return visitedUrls.contains(str);
-	}
-	public SaveToFilePlugin(HostInterface hostInterface) {
-		this.hostInterface = hostInterface;
-	}
-	private String appendIfNotNull(String original, String possiblyNull){
-		String toReturn = original;
-		if(null != possiblyNull){
-			toReturn += possiblyNull;
-		}
-		return toReturn;
-	}
+
 	@Override
 	public void onNewState(CrawlerContext context, StateVertex newState) {
 		try {
 			String dom = context.getBrowser().getStrippedDom();
 			String url = context.getCurrentState().getUrl();
-			if(hasBeenVisited(url)){
-				System.out.println("Already visited '" + url +"'. Skipping.");
-				return;
-			} else {
-				markVisited(url);
-				URI uri = new URI(url);
-				File parentDirs = hostInterface.getOutputDirectory();
-				String fileName = "";
-
-				fileName = appendIfNotNull(fileName, uri.getPath());
-				fileName = appendIfNotNull(fileName, uri.getQuery());
-				fileName += "#";
-				fileName = appendIfNotNull(fileName, uri.getFragment());
-
-				fileName += ".html";
-				
-				File file = new File(parentDirs, fileName);
-				file.getParentFile().mkdirs();
-				FileWriter fw = new FileWriter(file, false);
-				fw.write(dom);
-				fw.close();
-				}
+			
+			//Native Java String Hash Code is stable between versions
+			//as of v1.2 according to: http://stackoverflow.com/a/785150
+			String fileName = url.hashCode() + ".html";
+			File parentDirs = hostInterface.getOutputDirectory();
+			File file = new File(parentDirs, fileName);
+			file.getParentFile().mkdirs();
+			FileWriter fw = new FileWriter(file, false);
+			fw.write(dom);
+			fw.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
