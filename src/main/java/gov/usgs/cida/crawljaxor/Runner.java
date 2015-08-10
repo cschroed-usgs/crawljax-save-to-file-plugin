@@ -10,6 +10,7 @@ import com.crawljax.core.CrawljaxRunner;
 import com.crawljax.core.configuration.BrowserConfiguration;
 import com.crawljax.core.configuration.CrawljaxConfiguration;
 import com.crawljax.core.configuration.InputSpecification;
+import com.crawljax.core.plugin.HostInterface;
 import com.crawljax.core.plugin.HostInterfaceImpl;
 import com.crawljax.core.plugin.descriptor.Parameter;
 import com.crawljax.core.plugin.descriptor.PluginDescriptor;
@@ -40,12 +41,7 @@ public class Runner {
 		builder.crawlRules().insertRandomDataInInputForms(false);
 
 		builder.crawlRules().click("a");
-//		builder.crawlRules().click("button");
 
-		// except these
-//		builder.crawlRules().dontClick("a").underXPath("//DIV[@id='guser']");
-//		builder.crawlRules().dontClick("a").withText("Language Tools");
-		// limit the crawling scope
 		builder.setMaximumStates(MAX_NUMBER_STATES);
 		builder.setMaximumDepth(MAX_DEPTH);
 		builder.setBrowserConfig(new BrowserConfiguration(EmbeddedBrowser.BrowserType.PHANTOMJS, NUM_BROWSERS));
@@ -55,16 +51,11 @@ public class Runner {
 				return new StateVertexUrlEqualityImpl(id, url, name, dom, strippedDom);
 			}
 		});
-		PluginDescriptor descriptor = PluginDescriptor.forPlugin(SaveToFilePlugin.class);
 		Map<String, String> parameters = new HashMap<>();
-		for(Parameter parameter : descriptor.getParameters()) {
-			parameters.put(parameter.getId(), "value");
-		}
 		File dir = new File("out");
 		dir.mkdir();
-		builder.addPlugin(new SaveToFilePlugin(new HostInterfaceImpl(dir, parameters)));
-
-//		builder.crawlRules().setInputSpec(getInputSpecification());
+		HostInterface hostInterface = new HostInterfaceImpl(dir, parameters);
+		builder.addPlugin(new SaveToFilePlugin(hostInterface));
 
 		CrawljaxRunner crawljax = new CrawljaxRunner(builder.build());
 		crawljax.call();

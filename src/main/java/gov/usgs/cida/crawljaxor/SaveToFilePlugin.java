@@ -5,6 +5,7 @@ import java.io.FileWriter;
 
 import com.crawljax.core.CrawlerContext;
 import com.crawljax.core.plugin.HostInterface;
+import com.crawljax.core.plugin.HostInterfaceImpl;
 import com.crawljax.core.plugin.OnNewStatePlugin;
 import com.crawljax.core.state.StateVertex;
 import java.net.URI;
@@ -14,6 +15,10 @@ import java.util.Set;
 public class SaveToFilePlugin implements OnNewStatePlugin {
 
 	private HostInterface hostInterface;
+
+	SaveToFilePlugin(HostInterface hostInterface) {
+		this.hostInterface = hostInterface;
+	}
 
 	@Override
 	public void onNewState(CrawlerContext context, StateVertex newState) {
