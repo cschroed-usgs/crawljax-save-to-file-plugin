@@ -21,10 +21,6 @@ import org.apache.commons.io.FileUtils;
  */
 public class Runner {
 
-	private static final String URL = "http://cida-eros-wsdev.er.usgs.gov:8080/nwc/";
-	private static final int MAX_DEPTH = 3;
-	private static final int MAX_NUMBER_STATES = 100;
-	private static final int NUM_BROWSERS = 3;
 	/**
 	 * Entry point
 	 */
