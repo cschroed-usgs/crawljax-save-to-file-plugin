@@ -1,30 +1,19 @@
 package gov.usgs.cida.crawljaxor;
 
 import com.crawljax.browser.EmbeddedBrowser;
-import com.crawljax.core.CandidateElement;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-
 import com.crawljax.core.CrawljaxRunner;
 import com.crawljax.core.configuration.BrowserConfiguration;
 import com.crawljax.core.configuration.CrawljaxConfiguration;
-import com.crawljax.core.configuration.InputSpecification;
 import com.crawljax.core.plugin.HostInterface;
 import com.crawljax.core.plugin.HostInterfaceImpl;
-import com.crawljax.core.plugin.descriptor.Parameter;
-import com.crawljax.core.plugin.descriptor.PluginDescriptor;
 import com.crawljax.core.state.StateVertex;
 import com.crawljax.core.state.StateVertexFactory;
-import com.google.common.collect.ImmutableList;
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
-import org.w3c.dom.Document;
 
 /**
- * Use the sample plugin in combination with Crawljax.
+ * Use the plugin in combination with Crawljax.
  */
 public class Runner {
 

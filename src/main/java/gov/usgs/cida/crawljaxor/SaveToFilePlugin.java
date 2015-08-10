@@ -2,15 +2,10 @@ package gov.usgs.cida.crawljaxor;
 
 import java.io.File;
 import java.io.FileWriter;
-
 import com.crawljax.core.CrawlerContext;
 import com.crawljax.core.plugin.HostInterface;
-import com.crawljax.core.plugin.HostInterfaceImpl;
 import com.crawljax.core.plugin.OnNewStatePlugin;
 import com.crawljax.core.state.StateVertex;
-import java.net.URI;
-import java.util.HashSet;
-import java.util.Set;
 
 public class SaveToFilePlugin implements OnNewStatePlugin {
 
