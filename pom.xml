@@ -14,28 +14,41 @@
 	<packaging>jar</packaging>
 	<name>Save to File Crawljax Plugin</name>
 	<description>A Crawljax Plugin that saves the crawled pages to file</description>
-	<url>http://crawljax.com</url>
+	<url>https://github.com/USGS-CIDA/crawljax-save-to-file-plugin</url>
 
+	<organization>
+		<name>Center for Integrated Data Analytics</name>
+		<url>http://cida.usgs.gov</url>
+	</organization>
+	
 	<properties>
 		<crawljax.version>3.6</crawljax.version>
 	</properties>
 
-	<build>
-		<plugins>
-			<plugin>
-				<!-- This is disabled in case the plugin you are writing is not a git 
-					repository. If it is, we advise you to remove this <plugin> section so the 
-					plugin is enabled. -->
-				<groupId>pl.project13.maven</groupId>
-				<artifactId>git-commit-id-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>none</phase>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+	<scm>
+		<url>https://github.com/USGS-CIDA/crawljax-save-to-file-plugin</url>
+		<connection>scm:git:git@github.com:USGS-CIDA/crawljax-save-to-file-plugin.git</connection>
+		<developerConnection>scm:git:git@github.com:USGS-CIDA/crawljax-save-to-file-plugin.git</developerConnection>
+	</scm>
+	<distributionManagement>
+		<repository>
+			<id>cida-releases</id>
+			<name>CIDA Releases</name>
+			<url>http://internal.cida.usgs.gov/maven/content/repositories/cida-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>cida-snapshots</id>
+			<name>CIDA Snapshots</name>
+			<url>http://internal.cida.usgs.gov/maven/content/repositories/cida-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+	<repositories>
+		<repository>
+			<id>nexus</id>
+			<name>CIDA Nexus</name>
+			<url>http://cida.usgs.gov/maven/cida-public/</url>
+		</repository>
+	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>com.beust</groupId>
