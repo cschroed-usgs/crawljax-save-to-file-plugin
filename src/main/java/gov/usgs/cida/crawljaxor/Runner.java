@@ -41,6 +41,14 @@ public class Runner {
 		return dir;
 	}
 	
+	/**
+	 * Given Command line args, create a configuration for the Crawljax
+	 * crawler, and for the SaveToFilePlugin.
+	 * @param cliArgs
+	 * @return the CrawljaxConfiguration needed to traverse the site.
+	 * @throws IOException 
+	 */
+	
 	private static CrawljaxConfiguration getConfig(CliArgs cliArgs) throws IOException{
 		String url = cliArgs.getUrl();
 		int maxDepth = cliArgs.getMaxDepth();
@@ -48,12 +56,18 @@ public class Runner {
 		int numberOfBrowsers = cliArgs.getNumberOfBrowsers();
 		
 		CrawljaxConfiguration.CrawljaxConfigurationBuilder builder = CrawljaxConfiguration.builderFor(url);
+		
+		//override crawljax' default behavior
 		builder.crawlRules().insertRandomDataInInputForms(false);
-
+		
+		//only follow 'a' elements
 		builder.crawlRules().click("a");
-
+		
+		//set bounds for the traversal
 		builder.setMaximumStates(maxNumberOfStates);
 		builder.setMaximumDepth(maxDepth);
+		
+		
 		builder.setBrowserConfig(new BrowserConfiguration(EmbeddedBrowser.BrowserType.PHANTOMJS, numberOfBrowsers));
 
 		//override default factory so that states are only compared based on url
@@ -64,10 +78,14 @@ public class Runner {
 			}
 		});
 		
+		//set up parameters for the HostInterfaceImpl constructor
 		File outputDir = cliArgs.getOutputDir();
 		File dir = createCleanDir(outputDir);
+		
+		//empty for now
 		Map<String, String> parameters = new HashMap<>();
 		HostInterface hostInterface = new HostInterfaceImpl(dir, parameters);
+		
 		builder.addPlugin(new SaveToFilePlugin(hostInterface));
 		
 		return builder.build();
