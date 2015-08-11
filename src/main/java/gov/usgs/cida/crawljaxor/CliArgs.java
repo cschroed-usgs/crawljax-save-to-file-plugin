@@ -1,5 +1,6 @@
 package gov.usgs.cida.crawljaxor;
 import com.beust.jcommander.Parameter;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class CliArgs {
 	private String url;
 	
 	@Parameter(names = "-output-dir", description = "path to put the html files after they have been processed by a headless browser")
-	private String outputDir;
+	private File outputDir;
 	
 	@Parameter(names = "-max-depth", description = "Max depth of the crawler's traversal tree")
 	private int maxDepth = 3;
@@ -95,7 +96,15 @@ public class CliArgs {
 	/**
 	 * @return the outputDir
 	 */
-	public String getOutputDir() {
+	public File getOutputDir() {
 		return outputDir;
 	}
+
+	/**
+	 * @param outputDir the outputDir to set
+	 */
+	public void setOutputDir(File outputDir) {
+		this.outputDir = outputDir;
+	}
+
 }

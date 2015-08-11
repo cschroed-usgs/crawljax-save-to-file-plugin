@@ -33,8 +33,7 @@ public class Runner {
 		crawljax.call();
 	}
 	
-	private static File createCleanDir(String dirName) throws IOException{
-		File dir = new File(dirName);
+	private static File createCleanDir(File dir) throws IOException{
 		//clear existing dir
 		FileUtils.deleteDirectory(dir);
 		//re-create
@@ -65,7 +64,7 @@ public class Runner {
 			}
 		});
 		
-		String outputDir = cliArgs.getOutputDir();
+		File outputDir = cliArgs.getOutputDir();
 		File dir = createCleanDir(outputDir);
 		Map<String, String> parameters = new HashMap<>();
 		HostInterface hostInterface = new HostInterfaceImpl(dir, parameters);
