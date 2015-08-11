@@ -1,0 +1,65 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.crawljax.plugins</groupId>
+		<artifactId>crawljax-plugins-parent</artifactId>
+		<version>3.6</version>
+	</parent>
+
+	<groupId>gov.usgs.cida.crawljax.plugins</groupId>
+	<artifactId>SaveToFilePlugin</artifactId>
+	<version>0.1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>Save to File Crawljax Plugin</name>
+	<description>A Crawljax Plugin that saves the crawled pages to file</description>
+	<url>https://github.com/USGS-CIDA/crawljax-save-to-file-plugin</url>
+
+	<organization>
+		<name>Center for Integrated Data Analytics</name>
+		<url>http://cida.usgs.gov</url>
+	</organization>
+	
+	<properties>
+		<crawljax.version>3.6</crawljax.version>
+	</properties>
+
+	<scm>
+		<url>https://github.com/USGS-CIDA/crawljax-save-to-file-plugin</url>
+		<connection>scm:git:git@github.com:USGS-CIDA/crawljax-save-to-file-plugin.git</connection>
+		<developerConnection>scm:git:git@github.com:USGS-CIDA/crawljax-save-to-file-plugin.git</developerConnection>
+	</scm>
+	<distributionManagement>
+		<repository>
+			<id>cida-releases</id>
+			<name>CIDA Releases</name>
+			<url>http://internal.cida.usgs.gov/maven/content/repositories/cida-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>cida-snapshots</id>
+			<name>CIDA Snapshots</name>
+			<url>http://internal.cida.usgs.gov/maven/content/repositories/cida-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+	<repositories>
+		<repository>
+			<id>nexus</id>
+			<name>CIDA Nexus</name>
+			<url>http://cida.usgs.gov/maven/cida-public/</url>
+		</repository>
+	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>com.beust</groupId>
+			<artifactId>jcommander</artifactId>
+			<version>1.48</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+
+	</dependencies>
+</project>
